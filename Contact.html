@@ -3,72 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      name="description"
+      content="Ojandu Ronny's personal Information Technology portfolio."
+    />
+    <title>Contact | Ojandu Ronny Portfolio</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <section id="contact" class="contact">
-      <h2>Contact Me</h2>
-
-      <p class="contact-intro">
-        If you would like to get in touch with me, feel free to use the contact
-        details below or send me a message.
-      </p>
-
-      <div class="contact-container">
-        <!-- Contact Information -->
-        <div class="contact-info">
-          <h3>Get In Touch</h3>
-
-          <p>
-            <strong>Email:</strong><br />
-            ojronny17@hotmail.com
-          </p>
-
-          <p>
-            <strong>Phone:</strong><br />
-            +256 716 145 765          </p>
-
-          <p>
-            <strong>Location:</strong><br />
-            Uganda
-          </p>
+    <header>
+      <nav aria-label="Main navigation">
+        <h1>Ojandu Ronny</h1>
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-controls="nav-menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+        <ul id="nav-menu">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="About.html">ABOUT</a></li>
+          <li><a href="Education.html">EDUCATION</a></li>
+          <li><a href="Skills.html">SKILLS</a></li>
+          <li><a href="Interests.html">INTERESTS</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="Contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <p class="contact-intro">
+          If you would like to get in touch with me, feel free to use the
+          contact details below or prepare a message using the form.
+        </p>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Get In Touch</h3>
+            <p>
+              <strong>Email:</strong><br /><a
+                href="mailto:ojronny17@hotmail.com"
+                >jronny1973@hotmail.com</a
+              >
+            </p>
+            <p>
+              <strong>Phone:</strong><br /><a href="tel:+256716145765"
+                >+256 716 145 765</a
+              >
+            </p>
+            <p><strong>Location:</strong><br />Uganda</p>
+          </div>
+          <form class="contact-form" id="contact-form">
+            <label for="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              autocomplete="name"
+              required
+            />
+            <label for="email">Your Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            />
+            <label for="message">Your Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Write your message here..."
+              required
+            ></textarea>
+            <button type="submit">Send Message</button>
+            <p
+              id="form-message"
+              class="form-message"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
         </div>
+      </section>
+    </main>
+    <footer><p>&copy; 2026 Ojandu Ronny. All Rights Reserved.</p></footer>
 
-        <!-- Contact Form -->
-        <form class="contact-form" id="contact-form">
-          <label for="name">Your Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-          />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-          <label for="email">Your Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
-
-          <label for="message">Your Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="6"
-            placeholder="Write your message here..."
-            required
-          ></textarea>
-
-          <button type="submit">Send Message</button>
-        </form>
-        <p id="form-message"></p>
-      </div>
-    </section>
     <script src="script.js"></script>
   </body>
 </html>

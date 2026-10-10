@@ -3,180 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Ojandu Ronny Portfolio</title>
+    <meta
+      name="description"
+      content="Ojandu Ronny's personal Information Technology portfolio."
+    />
+    <title>Home | Ojandu Ronny Portfolio</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
-    <!-- Navigation Bar -->
     <header>
-      <nav>
+      <nav aria-label="Main navigation">
         <h1>Ojandu Ronny</h1>
-        <button id="menu-toggle" class="menu-toggle" type="button">☰</button>
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-controls="nav-menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
         <ul id="nav-menu">
           <li><a href="index.html">HOME</a></li>
           <li><a href="About.html">ABOUT</a></li>
           <li><a href="Education.html">EDUCATION</a></li>
           <li><a href="Skills.html">SKILLS</a></li>
           <li><a href="Interests.html">INTERESTS</a></li>
-          <li><a href="Contact.html">CONTACT</a></li>
           <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="Contact.html">CONTACT</a></li>
         </ul>
       </nav>
     </header>
-
-    <!-- Main Content -->
     <main>
-      <!-- Carousel will go here -->
-      <section class="carousel">
-        <!-- Slide 1: Welcome -->
+      <section class="carousel" aria-label="Portfolio highlights">
         <div class="slide active">
           <div class="slide-content">
             <h2>Hello, I'm Ronny</h2>
             <p>
-              Welcome to my personal website. Here you can learn more about me,
-              my education, skills, interests and goals.
+              Welcome to my personal website. Learn about my education, skills,
+              interests and projects.
             </p>
-            <a href="#about" class="btn">About Me</a>
+            <a href="About.html" class="btn">About Me</a>
           </div>
         </div>
-
-        <!-- Slide 2: Education -->
         <div class="slide">
           <div class="slide-content">
             <h2>My Education</h2>
             <p>
-              I am an Information Technology student with an interest in
-              technology, programming and developing useful digital solutions.
+              I am an Information Technology student interested in technology,
+              programming and useful digital solutions.
             </p>
-            <a href="#education" class="btn">My Education</a>
+            <a href="Education.html" class="btn">My Education</a>
           </div>
         </div>
-
-        <!-- Slide 3: My Skills -->
         <div class="slide">
           <div class="slide-content">
             <h2>My Skills</h2>
             <p>
-              I am developing my skills in web development, programming,
-              information systems and other areas of Information Technology.
+              I am developing my skills in web development, programming and
+              information systems.
             </p>
-            <a href="#skills" class="btn">View My Skills</a>
+            <a href="Skills.html" class="btn">View My Skills</a>
           </div>
         </div>
-
-        <!-- Slide 4: My Interests -->
-        <div class="slid">
+        <div class="slide">
           <div class="slide-content">
             <h2>My Interests</h2>
             <p>
               I enjoy learning about technology, creating websites, solving
               problems and exploring new ideas.
             </p>
-            <a href="#interests" class="btn">My Interests</a>
+            <a href="Interests.html" class="btn">My Interests</a>
           </div>
         </div>
-
-        <!-- Previous button -->
-        <button class="prev">&#10094;</button>
-
-        <!-- Next button -->
-        <button class="next">&#10095;</button>
-
-        <!-- Indicators -->
-        <div class="indicators">
-          <span class="dot active"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+        <button class="prev" type="button" aria-label="Previous slide">
+          &#10094;
+        </button>
+        <button class="next" type="button" aria-label="Next slide">
+          &#10095;
+        </button>
+        <div class="indicators" aria-label="Choose a slide">
+          <button
+            class="dot active"
+            type="button"
+            aria-label="Show slide 1"
+          ></button>
+          <button class="dot" type="button" aria-label="Show slide 2"></button>
+          <button class="dot" type="button" aria-label="Show slide 3"></button>
+          <button class="dot" type="button" aria-label="Show slide 4"></button>
         </div>
       </section>
       <!-- About Me Section -->
-      <section id="about" class="about">
-        <h2>About Me</h2>
+      <section class="about" id="about">
+        <div class="about-container">
+          <h2>About Me</h2>
+          <p class="about-intro">
+            Hello! I'm <strong>Ojandu Ronny</strong>, an Information Technology
+            student passionate about technology, programming and web
+            development.
+          </p>
 
-        <p>
-          Hello! My name is Ronnie. I am an Information Technology student with
-          a passion for technology, learning and developing useful digital
-          solutions.
-        </p>
+          <p>
+            I am developing my skills in HTML, CSS and JavaScript while learning
+            how information systems can solve everyday problems. I enjoy
+            exploring new technologies, practising through projects and
+            improving my problem-solving abilities.
+          </p>
 
-        <p>
-          I am interested in web development, programming, information systems
-          and exploring new technologies. I am continuously developing my skills
-          and gaining practical experience through different projects.
-        </p>
-      </section>
-      <section id="contact" class="contact">
-        <h2>Contact Me</h2>
+          <p>
+            My goal is to become a skilled IT professional who develops useful,
+            reliable and user-friendly digital solutions.
+          </p>
 
-        <p class="contact-intro">
-          If you would like to get in touch with me, feel free to use the
-          contact details below or send me a message.
-        </p>
-
-        <div class="contact-container">
-          <!-- Contact Information -->
-          <div class="contact-info">
-            <h3>Get In Touch</h3>
-
-            <p>
-              <strong>Email:</strong><br />
-              ojronny17@hotmail.com
-            </p>
-
-            <p>
-              <strong>Phone:</strong><br />
-              +256 716 145 765
-            </p>
-
-            <p>
-              <strong>Location:</strong><br />
-              Uganda
-            </p>
-          </div>
-
-          <!-- Contact Form -->
-          <form class="contact-form" id="contact-form">
-            <label for="name">Your Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-              required
-            />
-
-            <label for="email">Your Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-            />
-
-            <label for="message">Your Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="6"
-              placeholder="Write your message here..."
-              required
-            ></textarea>
-
-            <button type="submit">Send Message</button>
-          </form>
-          <p id="form-message"></p>
+          <a href="projects.html" class="about-btn"> Explore My Projects </a>
         </div>
       </section>
     </main>
+    <footer><p>&copy; 2026 Ojandu Ronny. All Rights Reserved.</p></footer>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2026 Ojandu Ronny. All Rights Reserved.</p>
-    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script src="script.js"></script>
   </body>

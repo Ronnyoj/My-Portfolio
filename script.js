@@ -1,111 +1,127 @@
-// Get all slides
-const slides = document.querySelectorAll(".slide");
+// Portfolio JavaScript. Each feature runs only when its HTML elements exist.
 
-// Get all indicator dots
-const dots = document.querySelectorAll(".dot");
-
-// Get previous and next buttons
+// Carousel: this block runs on the home page, where the carousel is present.
+const slides = Array.from(document.querySelectorAll(".slide"));
+const dots = Array.from(document.querySelectorAll(".dot"));
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
+let currentSlide = Math.max(
+  0,
+  slides.findIndex((slide) => slide.classList.contains("active")),
+);
+let carouselTimer;
 
-// Keep track of the current slide
-let currentSlide = 0;
-
-// Show a particular slide
 function showSlide(index) {
-  // Remove active class from all slides
-  slides.forEach((slide) => {
-    slide.classList.remove("active");
+  if (slides.length === 0) return;
+
+  currentSlide = (index + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === currentSlide);
   });
-
-  // Remove active class from all dots
-  dots.forEach((dot) => {
-    dot.classList.remove("active");
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === currentSlide);
+    dot.setAttribute("aria-pressed", String(i === currentSlide));
   });
-
-  // Add active class to selected slide
-  slides[index].classList.add("active");
-
-  // Add active class to selected dot
-  dots[index].classList.add("active");
-
-  // Update current slide
-  currentSlide = index;
 }
 
-// Next button
-nextButton.addEventListener("click", () => {
-  currentSlide++;
+if (slides.length > 0) {
+  // Ensure the active slide index is valid and show the initial slide.
+  showSlide(currentSlide);
 
-  // Go back to first slide
-  if (currentSlide >= slides.length) {
-    currentSlide = 0;
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+      restartCarouselTimer();
+    });
   }
 
-  showSlide(currentSlide);
-});
-
-// Previous button
-prevButton.addEventListener("click", () => {
-  currentSlide--;
-
-  // Go to last slide
-  if (currentSlide < 0) {
-    currentSlide = slides.length - 1;
+  if (prevButton) {
+    prevButton.addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+      restartCarouselTimer();
+    });
   }
 
-  showSlide(currentSlide);
-});
-
-// Click the dots
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", () => {
-    showSlide(index);
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      restartCarouselTimer();
+    });
   });
-});
 
-// Automatically change slide every 5 seconds
-setInterval(() => {
-  currentSlide++;
-
-  if (currentSlide >= slides.length) {
-    currentSlide = 0;
+  function restartCarouselTimer() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
   }
 
-  showSlide(currentSlide);
-}, 5000);
+  // Start automatic sliding only when there is more than one slide.
+  if (slides.length > 1) restartCarouselTimer();
+}
 
-// Mobile navigation menu
+// Mobile navigation menu.
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 
 if (menuToggle && navMenu) {
-  // Open and close the menu
-  menuToggle.addEventListener("click", function () {
-    navMenu.classList.toggle("active");
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("active");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation",
+    );
   });
 
-  // Close the menu when a link is clicked
-  const navLinks = navMenu.querySelectorAll("a");
-
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
+  navMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
       navMenu.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
     });
   });
 }
 
-// Contact form
-
+// Contact form: send messages using EmailJS.
 const contactForm = document.getElementById("contact-form");
 const formMessage = document.getElementById("form-message");
 
 if (contactForm && formMessage) {
-  contactForm.addEventListener("submit", function (event) {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    formMessage.textContent = "Thank you! Your message has been received.";
+    if (!contactForm.reportValidity()) return;
 
-    contactForm.reset();
+    if (typeof emailjs === "undefined") {
+      formMessage.textContent =
+        "Email service is unavailable. Please refresh the page and try again.";
+      return;
+    }
+
+    formMessage.textContent = "Sending your message...";
+
+    const submitButton = contactForm.querySelector('[type="submit"]');
+
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      await emailjs.sendForm(
+        "service_80vmneh",
+        "template_u3ck5cf",
+        contactForm,
+        { publicKey: "WKcRMQNhlGPwetCgq" },
+      );
+
+      formMessage.textContent =
+        "Thank you! Your message has been sent successfully.";
+
+      contactForm.reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+
+      formMessage.textContent =
+        "Sorry, your message could not be sent. Please try again later.";
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
